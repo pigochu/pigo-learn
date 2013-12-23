@@ -32,7 +32,7 @@ Using the wrong regular expression can be pointless, aggravating, or — in the 
 # 單一卡片驗證方式 #
 ## VISA Cards ##
 
-VISA 帳戶號碼由數字 "4" 開始。根據 VISA 的開發者 API 文件所述，有效的帳戶號碼是 13 至 19 個數字長度，且它們交易用的硬體設備規格必須盡可能支援 12 位數這麼小的 PANs。然而，由於16位數的 PANs 壓到性的流行，in-depth coverage of any lengths other than 16 digits are purposefully omitted. For supporting other card number lengths, review other bank card types。
+VISA 帳戶號碼由數字 "4" 開始。根據 VISA 的開發者 API 文件所述，有效的帳戶號碼是 13 至 19 個數字長度，且它們交易用的硬體設備規格必須盡可能支援 12 位數這麼小的 PANs。然而，由於16位數的 PANs 壓倒性的流行，in-depth coverage of any lengths other than 16 digits are purposefully omitted. For supporting other card number lengths, review other bank card types。
 
 - 最常見的輸入驗證正規表示法的 VISA卡號只需要允許 16個數字。不允許包含空白字元及破折號"-"，例如：“4012888888881881”。
 ~~~
