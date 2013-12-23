@@ -1,5 +1,5 @@
 
-正規表示法: 信用卡號文章翻譯說明
+正規表達式: 信用卡號文章翻譯說明
 ==========================
 本篇為翻譯文，主要介紹各信用卡編碼原則及正規表示法規則
 
@@ -9,7 +9,7 @@
 原文抓取日 2013-12-22 << 代表這一天抓的文章拿來翻的，之後原作者有沒有再改就不知道了。
 
 > **以下幾個專業的名詞文章中很多地方都會提到，於此先寫出可供對照**
-- Regex : Regular Expression 縮寫
+- Regex : Regular Expression 縮寫，正規表達式
 - Debit Card : 轉帳卡，刷卡的額度是從你的戶頭活存裡去扣，例如VISA金融卡就是 Debit Card。
 - CCN : Credit Card Number 縮寫，信用卡號的縮寫。
 - PAN : Primary Account Number 縮寫，中文稱作主帳號。
@@ -20,8 +20,8 @@
 
 ----------
 
-Regex: 信用卡號
-==========================
+正規表達式：信用卡號
+==============
 沒有純軟體解決方案可以完全精準的識別所有的信用卡號碼， 不論多麼複雜的正規表達式或演算法都無法做到。 Solely financial network and payment gateways provide the greatest assurance of valid account numbers and even their databases may be 30 days out of date. Only after you accept that should you move forward with home-spun validation.
 
 更糟的是，many international credit or debit cards are issued under dual banking systems. China Construction Bank issues a joint China UnionPay and Japan Credit Bureau card under IIN 356895, generally classified as a JCB account number. The same bank issues a joint China UnionPay and Discover Network card under IIN 622286, which falls into the UnionPay network. The Bank of Beijing issues a dual VISA UnionPay debit card under IIN 602969, a bucket not belonging to any of the major financial networks.
@@ -30,8 +30,9 @@ Using the wrong regular expression can be pointless, aggravating, or — in the 
 
 
 
-# 單一卡片驗證方式 #
-## VISA Cards ##
+## 單一卡片驗證方式 ##
+
+### VISA Cards ###
 
 VISA 帳戶號碼由數字 "4" 開始。根據 VISA 的開發者 API 文件所述，有效的帳戶號碼是 13 至 19 個數字長度，且它們交易用的硬體設備規格必須盡可能支援 12 位數這麼小的 PANs。然而，由於16位數的 PANs 壓倒性的流行，in-depth coverage of any lengths other than 16 digits are purposefully omitted. For supporting other card number lengths, review other bank card types。
 
@@ -73,7 +74,7 @@ VISA 帳戶號碼由數字 "4" 開始。根據 VISA 的開發者 API 文件所�
     <!-- Assert starting position is at a word boundary. Assert that the previous character is not a period or dash. Match the number "4". Match on 3 other digits (0..9). Assert that the next 9 digits cannot be three groups of three digits that are identical to the previous group of three digits. Match on a space or dash ("the delimiter"), if either present. Assert that the previous seven characters are not a digit, a space, four digits, and then a space. Match four digits and the previously seen delimiter, if any. Assert that the 3rd group cannot match the 2nd group. Assert that the next four digits are not identical. Assert that the 3rd group can not be "1234", "2345", "3456', "5678", or "7890". Match on four more digits. Assert that the next  six characters are not a space, four digits and a space. Match the delimiter. Assert that the 4th group cannot match the 3rd group. Assert that the last group of four does not have identical digits. Assert that the 4th group cannot be "1234" or "3456". Assert the next character is not a dash. Assert that the next two characters are not a period followed by a number. Assert ending position is at a word boundary.
 ~~~
 
-## MasterCard (萬事達卡) ##
+### MasterCard (萬事達卡) ###
 
 MasterCard 的帳戶號碼前面開頭是固定由 “51″ 到 “55″ 的數字，且整個卡號是 16 位數的長度。 
 
@@ -89,9 +90,9 @@ MasterCard 的帳戶號碼前面開頭是固定由 “51″ 到 “55″ 的數�
     ^5[1-5]\d{2}([\ \-]?)\d{4}\1\d{4}\1\d{4}$
 ~~~
 
-## Discover Card ##
+### Discover Card ###
 
-不論信用卡或轉帳卡前六位數是識別發行單位或銀行。根據  Discover Network 的開發者文件所述，Discover 卡的發行者識別號碼開頭是 6011, 622126-622925 (Discover 卡 在這範圍的是和中國銀聯卡UniPay一卡雙用的), 644-649 或 65.
+不論信用卡或轉帳卡前六位數都是用來識別發行單位或銀行。根據  Discover Network 的開發者文件所述，Discover 卡的發行者識別號碼開頭是 6011, 622126-622925 (Discover 卡 在這範圍的是和中國銀聯卡UniPay一卡雙用的), 644-649 或 65.
 
 - 16位數的 Discover 卡的輸入驗證正規表達式必須符合前六位數的發行者識別碼範圍，所以並不像 VISA或MasterCard的正規表達式只要符合全部長度的IINs那麼樣的直覺簡單，例如 “6011000990139424″。
 ~~~
@@ -105,9 +106,9 @@ MasterCard 的帳戶號碼前面開頭是固定由 “51″ 到 “55″ 的數�
     ^6(?:011|22(?:1(?=[\ \-]?(?:2[6-9]|[3-9]))|[2-8]|9(?=[\ \-]?(?:[01]|2[0-5])))|4[4-9]\d|5\d\d)([\ \-]?)\d{4}\1\d{4}\1\d{4}$
 ~~~
 
-## Japan Credit Bureau (JCB) ##
+### Japan Credit Bureau (JCB) ###
 
-Japan Credit Bureau (JCB) 帳戶號碼開頭有固定的 IIN 識別碼其範圍是 “3528″ 到 “3589″.
+Japan Credit Bureau (JCB) 帳戶號碼開頭有固定的 IIN 其範圍是 “3528″ 到 “3589″.
 
 - 以下是最基本的 JCB 卡 16 位數的輸入驗證正規表達式，不允許有空白符號或破折號, 例如 : “3566002020360505″.
 ~~~
@@ -121,7 +122,7 @@ Japan Credit Bureau (JCB) 帳戶號碼開頭有固定的 IIN 識別碼其範圍�
     ^35(?:2[89]|[3-8]\d)([\ \-]?)\d{4}\1\d{4}\1\d{4}$
 ~~~
 
-## American Express (美國運通) ##
+### American Express (美國運通) ###
 
 美國運通信用卡的帳戶號碼長度為 15位數字，一般來說開頭的數字會是 “34″ 或 “37″.
 
@@ -150,7 +151,7 @@ Japan Credit Bureau (JCB) 帳戶號碼開頭有固定的 IIN 識別碼其範圍�
 ~~~
 
 
-## China UnionPay (中國銀聯) ##
+### China UnionPay (中國銀聯) ###
 
 根據最近的統計，幾乎每一個中國公民在中國(包含了香港及澳門)至少擁有一張銀聯卡。 有超過250個國際和中國國內的會員銀行發行到世界各地約31億張銀聯信用卡和轉帳卡。這還不包括發行到雙銀行網路的卡, 大多數中國銀聯卡前綴號碼會是 “620″ 至 “625″, 且卡號長度為 16 至 19 個字元。
 
@@ -163,7 +164,7 @@ Form-input validation or data masking of variable-length card numbers is nearly 
   ~~~
 
 
-## Maestro ##
+### Maestro ###
 
 Maestro 卡號有好幾種前綴號碼, 包含 50, 56~58, 6390 及 67。比較常會看到 16 至 19 位數的卡號，但最少可以允許12位數卡號. 自從西元 2009 年, 所有新的Laser卡 (愛爾蘭的金融網路) 已經包了 Maestro 功能一卡雙用, 所以Laser卡的 6304 這個前綴號碼也和 Maestro 的正規表達式綁在一起。
 
@@ -173,12 +174,13 @@ Maestro 卡號有好幾種前綴號碼, 包含 50, 56~58, 6390 及 67。比較�
   ^(?:5[0678]\d\d|6304|6390|67\d\d)\d{8,15}$
   ~~~
 
-## Diner’s Club International ##
+### Diner’s Club International ###
 
 根據 Discover Network 所述，西元 2009 年 10 月，Discover，MasterCard 及 Diner’s Club 已經結盟，Diner's Club 之前所使用的 IIN 範圍(300-305, 3095, 36, 38-39)僅用於開發目的並且不會再被使用。目前 Diner’s Club 的帳戶號碼已經重新補發並分配到 Discover。因此，這些號碼不需要和其他類的帳戶號碼有同等的保護, 所以我不再提供 DCI 號碼正規表達式的支援。
 
-# 複合型卡片驗證方法 #
-## Visa, MasterCard, American Express 及 Discover Cards ##
+## 複合型卡片驗證方法 ##
+
+### Visa, MasterCard, American Express 及 Discover Cards ###
 
 - 以下是一個基本的正規表達式可以用來驗證比較通用的 16 位數卡號及 15 位數的美國運通卡. 比較舊的13位數卡號則被忽略了。 不允許有空白符號或破折號"-"， 例如: “4012888888881881″ 或 “378282246310005″.
 ~~~
@@ -190,16 +192,16 @@ Maestro 卡號有好幾種前綴號碼, 包含 50, 56~58, 6390 及 67。比較�
     \b(?:3[47]\d{2}([\ \-]?)\d{6}\1\d|(?:(?:4\d|5[1-5]|65)\d{2}|6011)([\ \-]?)\d{4}\2\d{4}\2)\d{4}\b
 ~~~
 
-## The Kitchen Sink ##
+### 再搞多一點(原文 The Kitchen Sink) ###
 
 This complicated content-inspection regular expression matches optionally delimited 15-digit American Express numbers and 16-digit VISA, MasterCard, Discover, and Japan Credit Bureau card numbers. China UnionPay and Maestro are not included. It includes much of the filtering from the above scrubbing and filtering regexes with a few minor modifications required to combine the rules while maintaining the overall flavor of functionality. This is far too complex to explain each expression token in depth, so you’re on your own in deciphering or modifying this behemoth.
 ~~~
 \b(?<!\-|\.)(?:(?:(?:4\d|5[1-5]|65)(\d\d)(?!\1{3})|35(?:2[89]|[3-8]\d)|6(?:011|4[4-9]\d|22(?:1(?!1\d|2[1-5])|[2-8]|9(?=1\d|2[1-5]))))([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\3{3})(\d{4})\2(?!\4|(\d)\5{3}|1234|2345|3456|5678|7890)(\d{4})(?!\ \d{4}\ \d)\2(?!\6|(\d)\7{3}|1234|3456)|3[47]\d{2}([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\9{5}|123456|234567|345678)\d{6}(?!\ \d{5}\ \d)\8(?!(\d)\10{4}|12345|56789|67890)\d)\d{4}(?!\-)(?!\.\d)\b
 ~~~
 
-> **Author’s Note**: The regex above contains ten capturing groups. Some regex engines limit the number of capturing groups to nine or fewer; attempting to reference the tenth capturing group (“\10″) with such an engine may be split and interpreted instead as: Match the data captured in the first group (“\1″), followed by the number zero (“0″). While not catastrophic in this case, the behavior is generally undesirable.
+> **原作者註**: 上述的正規表達式包含了 10 個擷取群組。 某些 regex engines 限制了擷取群組的數量到9個或更少 ; attempting to reference the tenth capturing group (“\10″) with such an engine may be split and interpreted instead as: Match the data captured in the first group (“\1″), followed by the number zero (“0″). While not catastrophic in this case, the behavior is generally undesirable.
 
-## Modifying the Kitchen Sink ##
+### Modifying the Kitchen Sink ###
 
 If you want to add support for more two-digit prefixes for 16-digit card numbers, add additional alternatives within “(?:4\d|5[1-5]|65)” near the start of the regex, .e.g. “(?:4\d|5[1-5]|62|65)” to also look for cards starting with “62″. To add more four-digit prefixes for 16-digit numbers, add alternatives within “))))”, e.g. “)))|7789)” to include numbers starting with “7789″. To exclude more four-digit suffixes, add alternatives within “(?!\6|(\d)\7{3}|1234|3456)” near the middle, .e.g. “(?!\6|(\d)\7{3}|1234|3456|6789)” to skip card numbers ending in “6789″.
 
@@ -208,13 +210,14 @@ The even longer regex below is the same as the behemoth above, plus extremely ba
 \b(?<![\$\&\+\_\--\/\<\>\?])(?:(?:(?:4\d|5[1-5]|65)(\d\d)(?!\1{3})|35(?:2[89]|[3-8]\d)|6(?:011|4[4-9]\d|22(?:1(?!1\d|2[1-5])|[2-8]|9(?=1\d|2[1-5]))))([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\3{3})(\d{4})\2(?!\4|(\d)\5{3}|1234|2345|3456|5678|7890)(\d{4})(?!\ \d{4}\ \d)\2(?!\6|(\d)\7{3}|1234|3456)|3[47]\d{2}([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\9{5}|123456|234567|345678)\d{6}(?!\ \d{5}\ \d)\8(?!(\d)\10{4}|12345|56789|67890)\d|(?:(?:5[0678]|6[27])\d\d|6304|6390)\d{11}(?!(\d)\11{3}))\d{4}(?![\$\&\+\_\-\/\<\>])(?![\.\?]\d)\b
 ~~~
 
-# Wrapping It All Up #
+## Wrapping It All Up ##
 
 These regular expressions are designed for matching credit and debit cards — gift cards, SIM cards, and loyalty or reward cards are intentionally not considered. That said, similar techniques used to match debit and credit cards can be used in matching similarly formatted account numbers outside the standard IIN buckets. For example, the Russian supermarket chain Перекресток issues loyalty cards with 16-digit account numbers that begin with 778900. The following regex format should look quite familiar by now:
 ~~~
 ^778900\d{10}$
 ~~~
 
-Lastly, don’t take my word for anything (or anyone else’s) regarding regular expressions. If you don’t understand regexes and how and when to use them, if you can’t break them apart into their components and comprehend them, don’t use them at all.
+最後，不要輕易採信我所說的關於正規表達式的任何事(或任何人)。如果你不了解正規表達式及如何使用它們的正確時機，如果你不能拆解他們每個組成的要素並理解它們，那麼不要使用它們。
+
 
 > **原作者註**:我花了很多的時間寫的這些文章不是為了要讓你複製/粘貼我的努力成果到你的代碼中，但你卻可以因此學習到技術，並對正規表達式如何工作有更深的了解。 如果你用我的正規表達式在你的商業產品中，請引用出處，最少寫個名字，可以的話也附上本頁 URL。無論如何，我不會拒絕你的免費拷貝的產品許可證明。如果您覺得我所努力的成果有對於您個人或職業生涯有用處，可以透過本頁底下按鈕捐贈。請不要只是藉由我長期努力工作的成果讓您得到最後獲利時甚至沒有一句"謝謝你"。

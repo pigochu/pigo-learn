@@ -14,8 +14,10 @@ No pure software solution can identify all credit card numbers with perfect accu
 To make matters worse, many international credit or debit cards are issued under dual banking systems. China Construction Bank issues a joint China UnionPay and Japan Credit Bureau card under IIN 356895, generally classified as a JCB account number. The same bank issues a joint China UnionPay and Discover Network card under IIN 622286, which falls into the UnionPay network. The Bank of Beijing issues a dual VISA UnionPay debit card under IIN 602969, a bucket not belonging to any of the major financial networks.
 
 Using the wrong regular expression can be pointless, aggravating, or — in the worst cases — disastrous. Be sure to first read [The Perfect Credit Card Number RegEx](the-perfect-credit-card-number-regex.md) to understand how to use different types of regular expressions, and why none of these regular expressions may be suited for your purpose.
-# Single Card Types #
-## VISA Cards ##
+
+## Single Card Types ##
+
+### VISA Cards ###
 
 VISA account numbers start with a “4″. According to VISA’s developer API documentation, valid account numbers range in length from 13 to 19 digits, and their hardware transaction device specifications require support for PANs with as few as 12 digits. However, due to the overwhelming prevalence of 16-digits PANs, in-depth coverage of any lengths other than 16 digits are purposefully omitted. For supporting other card number lengths, review other bank card types.
 
@@ -57,7 +59,7 @@ VISA account numbers start with a “4″. According to VISA’s developer API d
     <!-- Assert starting position is at a word boundary. Assert that the previous character is not a period or dash. Match the number "4". Match on 3 other digits (0..9). Assert that the next 9 digits cannot be three groups of three digits that are identical to the previous group of three digits. Match on a space or dash ("the delimiter"), if either present. Assert that the previous seven characters are not a digit, a space, four digits, and then a space. Match four digits and the previously seen delimiter, if any. Assert that the 3rd group cannot match the 2nd group. Assert that the next four digits are not identical. Assert that the 3rd group can not be "1234", "2345", "3456', "5678", or "7890". Match on four more digits. Assert that the next  six characters are not a space, four digits and a space. Match the delimiter. Assert that the 4th group cannot match the 3rd group. Assert that the last group of four does not have identical digits. Assert that the 4th group cannot be "1234" or "3456". Assert the next character is not a dash. Assert that the next two characters are not a period followed by a number. Assert ending position is at a word boundary.
 ~~~
 
-## MasterCard ##
+### MasterCard ###
 
 MasterCard account numbers start with prefixes ranging from “51″ to “55″, and are 16 digits in length.
 
@@ -73,7 +75,7 @@ MasterCard account numbers start with prefixes ranging from “51″ to “55″
     ^5[1-5]\d{2}([\ \-]?)\d{4}\1\d{4}\1\d{4}$
 ~~~
 
-## Discover Card ##
+### Discover Card ###
 
 The first six digits of any credit or debit card identify the issuing authority or bank. According to the Discover Network’s developer documentation, Discover Card’s issuer identification numbers start with 6011, 622126-622925 (Discover cards in this range are dual-branded with UnionPay), 644-649, or 65.
 
@@ -89,7 +91,7 @@ The first six digits of any credit or debit card identify the issuing authority 
     ^6(?:011|22(?:1(?=[\ \-]?(?:2[6-9]|[3-9]))|[2-8]|9(?=[\ \-]?(?:[01]|2[0-5])))|4[4-9]\d|5\d\d)([\ \-]?)\d{4}\1\d{4}\1\d{4}$
 ~~~
 
-## Japan Credit Bureau ##
+### Japan Credit Bureau ###
 
 Japan Credit Bureau (JCB) account numbers have IIN prefixes ranging from “3528″ to “3589″.
 
@@ -104,7 +106,7 @@ Japan Credit Bureau (JCB) account numbers have IIN prefixes ranging from “3528
     ^35(?:2[89]|[3-8]\d)([\ \-]?)\d{4}\1\d{4}\1\d{4}$
 ~~~
 
-## American Express ##
+### American Express ###
 
 American Express credit card account numbers are 15 digits in lengths, and generally start with either “34″ or “37″.
 
@@ -132,7 +134,7 @@ American Express credit card account numbers are 15 digits in lengths, and gener
     \b(?<!\-|\.)3[47]\d\d([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\2{5}|123456|234567|345678)\d{6}(?!\ \d{5}\ \d)\1(?!(\d)\3{4}|12345|56789)\d{5}(?!\-)(?!\.\d)\b
 ~~~
 
-## China UnionPay ##
+### China UnionPay ###
 
 According to recent statistics, almost every Chinese citizen in China (including Hong Kong and Macau) has at least one UnionPay card. There are approximately 3.1 billion UnionPay credit and debit cards issued worldwide by more than 250 international and Chinese domestic member banks. Excluding cards issued under dual networks, most China UnionPay card number have prefixes from “620″ through “625″, and range in length from 16 to 19 characters.
 
@@ -143,7 +145,7 @@ Form-input validation or data masking of variable-length card numbers is nearly 
     ^62[0-5]\d{13,16}$
 ~~~
 
-## Maestro ##
+### Maestro ###
 
 Maestro card numbers have several prefixes, including 50, 56-58, 6390, and 67. They are frequently between 16 and 19 digits in length, but are allowed to have as few as 12 digits. Since 2009, all new Laser debit cards (an Irish financial network) have been dual branded with Maestro, so the 6304 Laser prefix is bundled into the Maestro regex.
 
@@ -152,12 +154,12 @@ Maestro card numbers have several prefixes, including 50, 56-58, 6390, and 67. T
     ^(?:5[0678]\d\d|6304|6390|67\d\d)\d{8,15}$
 ~~~
 
-## Diner’s Club International ##
+### Diner’s Club International ###
 
 According to Discover Network, due to an alliance with Discover, MasterCard, and Diner’s Club, as of October 2009, the IIN ranges previously used by Diner’s Club (300-305, 3095, 36, 38-39) have been retired and are “for development purposes only”. Any current Diner’s Club account numbers have been reissued from number ranges assigned to Discover. As such, these numbers no longer require the same level of protection as other account numbers, so I am no longer supporting regexes for DCI numbers.
 
-# Multiple Card Types #
-## Visa, MasterCard, American Express, and Discover Cards ##
+## Multiple Card Types ##
+### Visa, MasterCard, American Express, and Discover Cards ###
 
 - The most basic input-validation regex for the most common 16-digit card numbers and 15-digit AmEx cards. Older 13-digit card numbers are omitted. No spaces or dashes are allowed, e.g. “4012888888881881″ or “378282246310005″.
 ~~~
@@ -169,7 +171,7 @@ According to Discover Network, due to an alliance with Discover, MasterCard, and
     \b(?:3[47]\d{2}([\ \-]?)\d{6}\1\d|(?:(?:4\d|5[1-5]|65)\d{2}|6011)([\ \-]?)\d{4}\2\d{4}\2)\d{4}\b
 ~~~
 
-## The Kitchen Sink ##
+### The Kitchen Sink ###
 
 This complicated content-inspection regular expression matches optionally delimited 15-digit American Express numbers and 16-digit VISA, MasterCard, Discover, and Japan Credit Bureau card numbers. China UnionPay and Maestro are not included. It includes much of the filtering from the above scrubbing and filtering regexes with a few minor modifications required to combine the rules while maintaining the overall flavor of functionality. This is far too complex to explain each expression token in depth, so you’re on your own in deciphering or modifying this behemoth.
 ~~~
@@ -178,7 +180,7 @@ This complicated content-inspection regular expression matches optionally delimi
 
 > **Author’s Note**: The regex above contains ten capturing groups. Some regex engines limit the number of capturing groups to nine or fewer; attempting to reference the tenth capturing group (“\10″) with such an engine may be split and interpreted instead as: Match the data captured in the first group (“\1″), followed by the number zero (“0″). While not catastrophic in this case, the behavior is generally undesirable.
 
-## Modifying the Kitchen Sink ##
+### Modifying the Kitchen Sink ###
 
 If you want to add support for more two-digit prefixes for 16-digit card numbers, add additional alternatives within “(?:4\d|5[1-5]|65)” near the start of the regex, .e.g. “(?:4\d|5[1-5]|62|65)” to also look for cards starting with “62″. To add more four-digit prefixes for 16-digit numbers, add alternatives within “))))”, e.g. “)))|7789)” to include numbers starting with “7789″. To exclude more four-digit suffixes, add alternatives within “(?!\6|(\d)\7{3}|1234|3456)” near the middle, .e.g. “(?!\6|(\d)\7{3}|1234|3456|6789)” to skip card numbers ending in “6789″.
 
@@ -187,7 +189,7 @@ The even longer regex below is the same as the behemoth above, plus extremely ba
 \b(?<![\$\&\+\_\--\/\<\>\?])(?:(?:(?:4\d|5[1-5]|65)(\d\d)(?!\1{3})|35(?:2[89]|[3-8]\d)|6(?:011|4[4-9]\d|22(?:1(?!1\d|2[1-5])|[2-8]|9(?=1\d|2[1-5]))))([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\3{3})(\d{4})\2(?!\4|(\d)\5{3}|1234|2345|3456|5678|7890)(\d{4})(?!\ \d{4}\ \d)\2(?!\6|(\d)\7{3}|1234|3456)|3[47]\d{2}([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\9{5}|123456|234567|345678)\d{6}(?!\ \d{5}\ \d)\8(?!(\d)\10{4}|12345|56789|67890)\d|(?:(?:5[0678]|6[27])\d\d|6304|6390)\d{11}(?!(\d)\11{3}))\d{4}(?![\$\&\+\_\-\/\<\>])(?![\.\?]\d)\b
 ~~~
 
-# Wrapping It All Up #
+## Wrapping It All Up ##
 
 These regular expressions are designed for matching credit and debit cards — gift cards, SIM cards, and loyalty or reward cards are intentionally not considered. That said, similar techniques used to match debit and credit cards can be used in matching similarly formatted account numbers outside the standard IIN buckets. For example, the Russian supermarket chain Перекресток issues loyalty cards with 16-digit account numbers that begin with 778900. The following regex format should look quite familiar by now:
 ~~~
