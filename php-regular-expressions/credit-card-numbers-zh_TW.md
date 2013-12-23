@@ -24,9 +24,9 @@
 ==============
 沒有純軟體解決方案可以完全精準的識別所有的信用卡號碼， 不論多麼複雜的正規表達式或演算法都無法做到。 Solely financial network and payment gateways provide the greatest assurance of valid account numbers and even their databases may be 30 days out of date. Only after you accept that should you move forward with home-spun validation.
 
-更糟的是，many international credit or debit cards are issued under dual banking systems. China Construction Bank issues a joint China UnionPay and Japan Credit Bureau card under IIN 356895, generally classified as a JCB account number. The same bank issues a joint China UnionPay and Discover Network card under IIN 622286, which falls into the UnionPay network. The Bank of Beijing issues a dual VISA UnionPay debit card under IIN 602969, a bucket not belonging to any of the major financial networks.
+更糟的是，有許多國際信用卡或轉帳卡是發行在雙銀行系統下都可以通用的。 如中國建設銀行發行了一張 IIN 356895 的卡是中國銀聯卡及Japan Credit Bureau card 都可通用的。.同樣的銀行又發行了一張 IIN 622286 的卡可於中國銀聯和 Discover Network 間通用, 這些卡都是屬於 UnionPay network(中國銀聯網路)。 北京銀行發行了一張 IIN 為 602969 的雙系統 VISA UnionPay 轉帳卡，遺憾的是它並不屬於任何主要的金融網路。
 
-Using the wrong regular expression can be pointless, aggravating, or — in the worst cases — disastrous. Be sure to first read [The Perfect Credit Card Number RegEx](the-perfect-credit-card-number-regex.md) to understand how to use different types of regular expressions, and why none of these regular expressions may be suited for your purpose.
+使用錯誤的正規表達式將會讓結果變成是無意義且惱人，在最壞的情況下甚至會發生災難。因此請務必先閱讀 [The Perfect Credit Card Number RegEx](the-perfect-credit-card-number-regex.md) 以及為何這些正規表達式沒有一個可以達到你的目的。
 
 
 
@@ -43,7 +43,7 @@ VISA 帳戶號碼由數字 "4" 開始。根據 VISA 的開發者 API 文件所�
   <!-- Assert starting position is the beginning of the string or line. Match the number "4". Match on 15 other digits (0..9). Assert position is the end of the string or line. -->
 ~~~
 
-- 最佳的VISA卡號輸入驗證的正規表達式是可以選擇性的匹配是否有空白符號或破折號分割後的號碼群組，例如 “4012-8888-8888-1881″，要通過 VISA 的付費閘道驗證 PAN 前你必須去掉那些空白字元及破折號。
+- 最佳的VISA卡號輸入驗證的正規表達式是可以選擇性的匹配是否有空白符號或破折號分割後的號碼群組，例如 “4012-8888-8888-1881″，要通過 VISA 的付費通道驗證 PAN 前你必須去掉那些空白字元及破折號。
 ~~~
   ^4\d{3}([\ \-]?)\d{4}\1\d{4}\1\d{4}$
      
