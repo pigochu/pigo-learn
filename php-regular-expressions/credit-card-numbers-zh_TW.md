@@ -147,7 +147,7 @@ Japan Credit Bureau (JCB) 帳戶號碼開頭有固定的 IIN 識別碼其範圍�
 
 ## China UnionPay (中國銀聯) ##
 
-According to recent statistics, almost every Chinese citizen in China (including Hong Kong and Macau) has at least one UnionPay card. There are approximately 3.1 billion UnionPay credit and debit cards issued worldwide by more than 250 international and Chinese domestic member banks. Excluding cards issued under dual networks, most China UnionPay card number have prefixes from “620″ through “625″, and range in length from 16 to 19 characters.
+根據最近的統計，幾乎每一個中國公民在中國(包含了香港及澳門)至少擁有一張銀聯卡。 有超過250個國際和中國國內的會員銀行發行到世界各地約31億張銀聯信用卡和轉帳卡。這還不包括發行到雙銀行網路的卡, 大多數中國銀聯卡前面的號碼會是 “620″ 至 “625″, 且卡號長度為 16 至 19 個字元。
 
 Form-input validation or data masking of variable-length card numbers is nearly as simple and effective as fixed-length numbers, but variable-length numbers pose significant false-positive issues when performing free-form inspection or discovery.
 
