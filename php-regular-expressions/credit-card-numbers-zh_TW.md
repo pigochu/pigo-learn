@@ -6,7 +6,7 @@
 這篇文章原始出處來自 http://www.richardsramblings.com/regex/credit-card-numbers/
 為了避免該站不見了，原文存成 creit-card-numbers.md
 
-> ** 以下幾個專業的名詞文章中很多地方都會提到，於此先寫出可供對照 **
+> **以下幾個專業的名詞文章中很多地方都會提到，於此先寫出可供對照**
 - Regex : Regular Expression 縮寫
 - Debit Card : 轉帳卡，刷卡的額度是從你的戶頭活存裡去扣，例如VISA金融卡就是 Debit Card。
 - CCN : Credit Card Number 縮寫，信用卡號的縮寫。
