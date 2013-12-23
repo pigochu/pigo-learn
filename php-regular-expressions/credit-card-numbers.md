@@ -4,6 +4,8 @@
 這篇文章保留了原文，原始出處來自 http://www.richardsramblings.com/regex/credit-card-numbers/
 為了避免該站不見了，故保留原文備用
 
+----------
+
 
 Regex: Credit Card Numbers
 ==========================
@@ -11,7 +13,7 @@ No pure software solution can identify all credit card numbers with perfect accu
 
 To make matters worse, many international credit or debit cards are issued under dual banking systems. China Construction Bank issues a joint China UnionPay and Japan Credit Bureau card under IIN 356895, generally classified as a JCB account number. The same bank issues a joint China UnionPay and Discover Network card under IIN 622286, which falls into the UnionPay network. The Bank of Beijing issues a dual VISA UnionPay debit card under IIN 602969, a bucket not belonging to any of the major financial networks.
 
-Using the wrong regular expression can be pointless, aggravating, or — in the worst cases — disastrous. Be sure to first read [The Perfect Credit Card Number RegEx](http://www.richardsramblings.com/2012/12/the-perfect-credit-card-number-regex/) to understand how to use different types of regular expressions, and why none of these regular expressions may be suited for your purpose.
+Using the wrong regular expression can be pointless, aggravating, or — in the worst cases — disastrous. Be sure to first read [The Perfect Credit Card Number RegEx](the-perfect-credit-card-number-regex.md) to understand how to use different types of regular expressions, and why none of these regular expressions may be suited for your purpose.
 # Single Card Types #
 ## VISA Cards ##
 

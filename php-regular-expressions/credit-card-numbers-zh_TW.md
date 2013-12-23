@@ -16,7 +16,9 @@
 - IIN : Issuer identification number 縮寫，發行者識別碼，每家銀行會不同。
 - PAN/IIN 詳細英文解釋可參考 [http://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29](http://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29)
 
-中文翻譯者: Pigo Chu ，翻譯進度 25%，以下開始為中文翻譯
+中文翻譯者: Pigo Chu ，翻譯進度 35%，以下開始為中文翻譯
+
+----------
 
 Regex: 信用卡號
 ==========================
@@ -24,7 +26,7 @@ Regex: 信用卡號
 
 更糟的是，many international credit or debit cards are issued under dual banking systems. China Construction Bank issues a joint China UnionPay and Japan Credit Bureau card under IIN 356895, generally classified as a JCB account number. The same bank issues a joint China UnionPay and Discover Network card under IIN 622286, which falls into the UnionPay network. The Bank of Beijing issues a dual VISA UnionPay debit card under IIN 602969, a bucket not belonging to any of the major financial networks.
 
-Using the wrong regular expression can be pointless, aggravating, or — in the worst cases — disastrous. Be sure to first read [The Perfect Credit Card Number RegEx](http://www.richardsramblings.com/2012/12/the-perfect-credit-card-number-regex/) to understand how to use different types of regular expressions, and why none of these regular expressions may be suited for your purpose.
+Using the wrong regular expression can be pointless, aggravating, or — in the worst cases — disastrous. Be sure to first read [The Perfect Credit Card Number RegEx](the-perfect-credit-card-number-regex.md) to understand how to use different types of regular expressions, and why none of these regular expressions may be suited for your purpose.
 
 
 
