@@ -15,7 +15,7 @@
 - PAN/IIN 詳細英文解釋可參考 [http://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29](http://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29)
 
 
-中文翻譯者: Pigo Chu ，翻譯進度 10%，以下開始為中文翻譯
+中文翻譯者: Pigo Chu ，翻譯進度 20%，以下開始為中文翻譯
 
 Regex: 信用卡號
 ==========================
@@ -158,9 +158,9 @@ Form-input validation or data masking of variable-length card numbers is nearly 
 
 ## Maestro ##
 
-Maestro card numbers have several prefixes, including 50, 56-58, 6390, and 67. They are frequently between 16 and 19 digits in length, but are allowed to have as few as 12 digits. Since 2009, all new Laser debit cards (an Irish financial network) have been dual branded with Maestro, so the 6304 Laser prefix is bundled into the Maestro regex.
+Maestro 卡號有好幾種前綴號碼, 包含 50, 56~58, 6390 及 67. 比較常會看到 16 至 19 位數的卡號，但是最少可以允許12位數卡號. 自從西元 2009 年, 所有新的Laser卡 (愛爾蘭的金融網路) 已經包了 Maestro 功能一卡雙用, 所以Laser卡的 6304 這個前綴號碼也和 Maestro 的正規表達式綁在一起。
 
-- A basic input-validation regex for 12- to 19-digit Maestro card numbers. No spaces or dashes are allowed, e.g. “5019717010103742″.
+- 以下是一個最基本的輸入驗證正規表達式可用於 12 至 19 位數的 Maestro 卡號，不允許其中有空白符號及破折號"-"， 例如：“5019717010103742″.
 ~~~
     ^(?:5[0678]\d\d|6304|6390|67\d\d)\d{8,15}$
 ~~~
