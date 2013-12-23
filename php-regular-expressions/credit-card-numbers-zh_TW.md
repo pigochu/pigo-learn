@@ -1,27 +1,36 @@
 
-正規表示法: 信用卡號文章說明
+正規表示法: 信用卡號文章翻譯說明
 ==========================
 本篇為翻譯文，主要介紹各信用卡編碼原則及正規表示法規則
 
 這篇文章原始出處來自 http://www.richardsramblings.com/regex/credit-card-numbers/
 為了避免該站不見了，原文存成 creit-card-numbers.md
 
-若想要省事點也可以參考 http://www.regular-expressions.info/creditcard.html
+> ** 以下幾個專業的名詞文章中很多地方都會提到，於此先寫出可供對照 **
+> Regex : Regular Expression 縮寫
+> Debit Card : 轉帳卡，刷卡的額度是從你的戶頭活存裡去扣，例如VISA金融卡就是 Debit Card。
+> CCN : Credit Card Number 縮寫，信用卡號的縮寫。
+> PAN : Primary Account Number 縮寫，中文稱作主帳號。
+> IIN : Issuer identification number 縮寫，發行者識別碼，每家銀行會不同。
+> PAN/IIN 詳細英文解釋可參考 [http://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29](http://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29)
 
-翻譯: Pigo Chu ，以下開始為原文翻譯
 
+中文翻譯者: Pigo Chu ，翻譯進度 10%，以下開始為中文翻譯
 
 Regex: 信用卡號
 ==========================
-沒有純軟體解決方案可以完美的識別所有的信用卡號碼與精度， 不論多麼複雜的正規表達式或演算法都無法做到。 Solely financial network and payment gateways provide the greatest assurance of valid account numbers and even their databases may be 30 days out of date. Only after you accept that should you move forward with home-spun validation.
+沒有純軟體解決方案可以完全精準的識別所有的信用卡號碼， 不論多麼複雜的正規表達式或演算法都無法做到。 Solely financial network and payment gateways provide the greatest assurance of valid account numbers and even their databases may be 30 days out of date. Only after you accept that should you move forward with home-spun validation.
 
-To make matters worse, many international credit or debit cards are issued under dual banking systems. China Construction Bank issues a joint China UnionPay and Japan Credit Bureau card under IIN 356895, generally classified as a JCB account number. The same bank issues a joint China UnionPay and Discover Network card under IIN 622286, which falls into the UnionPay network. The Bank of Beijing issues a dual VISA UnionPay debit card under IIN 602969, a bucket not belonging to any of the major financial networks.
+更糟的是，many international credit or debit cards are issued under dual banking systems. China Construction Bank issues a joint China UnionPay and Japan Credit Bureau card under IIN 356895, generally classified as a JCB account number. The same bank issues a joint China UnionPay and Discover Network card under IIN 622286, which falls into the UnionPay network. The Bank of Beijing issues a dual VISA UnionPay debit card under IIN 602969, a bucket not belonging to any of the major financial networks.
 
 Using the wrong regular expression can be pointless, aggravating, or — in the worst cases — disastrous. Be sure to first read The Perfect Credit Card Number RegEx to understand how to use different types of regular expressions, and why none of these regular expressions may be suited for your purpose.
+
+
+
 # Single Card Types #
 ## VISA Cards ##
 
-VISA 帳戶號碼由數字 "4" 開始。根據 VISA 的開發者 API 文件所述，有效的帳戶號碼是 13 至 19 個數字長度，且它們交易用的硬體設備規格必須支援 PANs with as few as 12 digits。然而，由於16位數的 PANs 壓倒性流行，in-depth coverage of any lengths other than 16 digits are purposefully omitted. For supporting other card number lengths, review other bank card types。
+VISA 帳戶號碼由數字 "4" 開始。根據 VISA 的開發者 API 文件所述，有效的帳戶號碼是 13 至 19 個數字長度，且它們交易用的硬體設備規格必須盡可能支援 12 位數這麼小的 PANs。然而，由於16位數的 PANs 壓到性的流行，in-depth coverage of any lengths other than 16 digits are purposefully omitted. For supporting other card number lengths, review other bank card types。
 
 - 最常見的輸入驗證正規表示法的 VISA卡號只需要允許 16個數字。不允許包含空白字元及破折號"-"，例如：“4012888888881881”。
 ~~~
@@ -70,7 +79,7 @@ MasterCard 的帳戶號碼前面開頭是固定由 “51″ 到 “55″ 的數�
     ^5[1-5]\d{14}$
 ~~~
 
-- 對於每一個 VISA卡的正規表達式前面都包含了 “4(\d{3})”，若將其換成 “5([1-5]\d{2})”那就是萬事達卡的正規表達式了。對於沒有進行分組的也適用就是“4(\d{3})”換成 “5([1-5]\d{2})”，所有的VISA卡號的通用運算式都可以依照上述替代方式轉換為 MasterCard 的正規表達式。以下範例是 VISA 對應 MasterCard 的輸入驗證，這包含了可以選擇性的匹配以空白或破折號的數字分組 :
+- 相對於每一張 VISA卡的正規表達式前面都包含了 “4(\d{3})”，若將其換成 “5([1-5]\d{2})”那就是萬事達卡的正規表達式了。對於沒有號碼分組的也是“4(\d{3})”換成 “5([1-5]\d{2})”，所有的VISA卡號的通用運算式都可以依照上述替代方式轉換為 MasterCard 的正規表達式。以下範例是 VISA 轉換為 MasterCard 的輸入驗證，這包含了可以選擇性的以空白或破折號來匹配分隔後的每一組數字 :
 ~~~
     ^4\d{3}([\ \-]?)\d{4}\1\d{4}\1\d{4}$
     變成
