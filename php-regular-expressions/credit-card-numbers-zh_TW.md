@@ -24,7 +24,7 @@ Regex: 信用卡號
 
 更糟的是，many international credit or debit cards are issued under dual banking systems. China Construction Bank issues a joint China UnionPay and Japan Credit Bureau card under IIN 356895, generally classified as a JCB account number. The same bank issues a joint China UnionPay and Discover Network card under IIN 622286, which falls into the UnionPay network. The Bank of Beijing issues a dual VISA UnionPay debit card under IIN 602969, a bucket not belonging to any of the major financial networks.
 
-Using the wrong regular expression can be pointless, aggravating, or — in the worst cases — disastrous. Be sure to first read The Perfect Credit Card Number RegEx to understand how to use different types of regular expressions, and why none of these regular expressions may be suited for your purpose.
+Using the wrong regular expression can be pointless, aggravating, or — in the worst cases — disastrous. Be sure to first read [The Perfect Credit Card Number RegEx](http://www.richardsramblings.com/2012/12/the-perfect-credit-card-number-regex/) to understand how to use different types of regular expressions, and why none of these regular expressions may be suited for your purpose.
 
 
 
@@ -183,7 +183,7 @@ Maestro 卡號有好幾種前綴號碼, 包含 50, 56~58, 6390 及 67。比較�
     \b(?:3[47]\d|(?:4\d|5[1-5]|65)\d{2}|6011)\d{12}\b
 ~~~
 
-- 同上例, 多了可選擇性的空白符號或破折號用來匹配數字組別之間有分隔符號的卡號類型，例如 : “4012-8888-8888-1881″ 或 “3782 822463 10005″.
+- 同上例, 多了可選擇性的空白符號或破折號用來匹配每組數字之間有用到分隔符號的卡號類型，例如 : “4012-8888-8888-1881″ 或 “3782 822463 10005″.
 ~~~
     \b(?:3[47]\d{2}([\ \-]?)\d{6}\1\d|(?:(?:4\d|5[1-5]|65)\d{2}|6011)([\ \-]?)\d{4}\2\d{4}\2)\d{4}\b
 ~~~
@@ -206,7 +206,7 @@ The even longer regex below is the same as the behemoth above, plus extremely ba
 \b(?<![\$\&\+\_\--\/\<\>\?])(?:(?:(?:4\d|5[1-5]|65)(\d\d)(?!\1{3})|35(?:2[89]|[3-8]\d)|6(?:011|4[4-9]\d|22(?:1(?!1\d|2[1-5])|[2-8]|9(?=1\d|2[1-5]))))([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\3{3})(\d{4})\2(?!\4|(\d)\5{3}|1234|2345|3456|5678|7890)(\d{4})(?!\ \d{4}\ \d)\2(?!\6|(\d)\7{3}|1234|3456)|3[47]\d{2}([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\9{5}|123456|234567|345678)\d{6}(?!\ \d{5}\ \d)\8(?!(\d)\10{4}|12345|56789|67890)\d|(?:(?:5[0678]|6[27])\d\d|6304|6390)\d{11}(?!(\d)\11{3}))\d{4}(?![\$\&\+\_\-\/\<\>])(?![\.\?]\d)\b
 ~~~
 
-## Wrapping It All Up ##
+# Wrapping It All Up #
 
 These regular expressions are designed for matching credit and debit cards — gift cards, SIM cards, and loyalty or reward cards are intentionally not considered. That said, similar techniques used to match debit and credit cards can be used in matching similarly formatted account numbers outside the standard IIN buckets. For example, the Russian supermarket chain Перекресток issues loyalty cards with 16-digit account numbers that begin with 778900. The following regex format should look quite familiar by now:
 ~~~
@@ -215,6 +215,4 @@ These regular expressions are designed for matching credit and debit cards — g
 
 Lastly, don’t take my word for anything (or anyone else’s) regarding regular expressions. If you don’t understand regexes and how and when to use them, if you can’t break them apart into their components and comprehend them, don’t use them at all.
 
-> **Author’s Note**: I spend considerable time writing these articles not so you can copy/paste my hard work into your code, but so you can study the techniques and gain a deeper understanding of how regular expressions work.
-> 
-> If you use my regexes in your commercial product, please give credit where credit is due, minimally by name, optionally accompanied by a link to or URL of this page. I wouldn’t refuse a free copy/license of your product, either. If you otherwise find the fruits of my labor useful in your personal or professional daily life, please make a donation using the button at the bottom of the page. Just please don’t profit from the end result of my long, hard work without even a “Thank You!”
+> **原作者註**:我花了很多的時間寫的這些文章不是為了要讓你複製/粘貼我的努力成果到你的代碼中，但你卻可以因此學習到技術，並對正規表達式如何工作有更深的了解。 如果你用我的正規表達式在你的商業產品中，請引用出處，最少寫個名字，可以的話也附上本頁 URL。無論如何，我不會拒絕你的免費拷貝的產品許可證明。如果您覺得我所努力的成果有對於您個人或職業生涯有用處，可以透過本頁底下按鈕捐贈。請不要只是藉由我長期努力工作的成果讓您得到最後獲利時甚至沒有一句"謝謝你"。
