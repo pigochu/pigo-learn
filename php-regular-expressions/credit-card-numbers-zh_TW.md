@@ -4,7 +4,9 @@
 本篇為翻譯文，主要介紹各信用卡編碼原則及正規表示法規則
 
 這篇文章原始出處來自 http://www.richardsramblings.com/regex/credit-card-numbers/
-為了避免該站不見了，原文存成 creit-card-numbers.md
+為了避免該站不見了，原文存成 [creit-card-numbers.md](creit-card-numbers.md)
+
+原文抓取日 2013-12-22 << 代表這一天抓的文章拿來翻的，之後原作者有沒有再改就不知道了。
 
 > **以下幾個專業的名詞文章中很多地方都會提到，於此先寫出可供對照**
 - Regex : Regular Expression 縮寫
@@ -15,7 +17,7 @@
 - PAN/IIN 詳細英文解釋可參考 [http://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29](http://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29)
 
 
-中文翻譯者: Pigo Chu ，翻譯進度 20%，以下開始為中文翻譯
+中文翻譯者: Pigo Chu ，翻譯進度 25%，以下開始為中文翻譯
 
 Regex: 信用卡號
 ==========================
@@ -27,7 +29,7 @@ Using the wrong regular expression can be pointless, aggravating, or — in the 
 
 
 
-# Single Card Types #
+# 單一卡片驗證方式 #
 ## VISA Cards ##
 
 VISA 帳戶號碼由數字 "4" 開始。根據 VISA 的開發者 API 文件所述，有效的帳戶號碼是 13 至 19 個數字長度，且它們交易用的硬體設備規格必須盡可能支援 12 位數這麼小的 PANs。然而，由於16位數的 PANs 壓到性的流行，in-depth coverage of any lengths other than 16 digits are purposefully omitted. For supporting other card number lengths, review other bank card types。
@@ -147,7 +149,7 @@ Japan Credit Bureau (JCB) 帳戶號碼開頭有固定的 IIN 識別碼其範圍�
 
 ## China UnionPay (中國銀聯) ##
 
-根據最近的統計，幾乎每一個中國公民在中國(包含了香港及澳門)至少擁有一張銀聯卡。 有超過250個國際和中國國內的會員銀行發行到世界各地約31億張銀聯信用卡和轉帳卡。這還不包括發行到雙銀行網路的卡, 大多數中國銀聯卡前面的號碼會是 “620″ 至 “625″, 且卡號長度為 16 至 19 個字元。
+根據最近的統計，幾乎每一個中國公民在中國(包含了香港及澳門)至少擁有一張銀聯卡。 有超過250個國際和中國國內的會員銀行發行到世界各地約31億張銀聯信用卡和轉帳卡。這還不包括發行到雙銀行網路的卡, 大多數中國銀聯卡前綴號碼會是 “620″ 至 “625″, 且卡號長度為 16 至 19 個字元。
 
 Form-input validation or data masking of variable-length card numbers is nearly as simple and effective as fixed-length numbers, but variable-length numbers pose significant false-positive issues when performing free-form inspection or discovery.
 
@@ -158,7 +160,7 @@ Form-input validation or data masking of variable-length card numbers is nearly 
 
 ## Maestro ##
 
-Maestro 卡號有好幾種前綴號碼, 包含 50, 56~58, 6390 及 67. 比較常會看到 16 至 19 位數的卡號，但是最少可以允許12位數卡號. 自從西元 2009 年, 所有新的Laser卡 (愛爾蘭的金融網路) 已經包了 Maestro 功能一卡雙用, 所以Laser卡的 6304 這個前綴號碼也和 Maestro 的正規表達式綁在一起。
+Maestro 卡號有好幾種前綴號碼, 包含 50, 56~58, 6390 及 67. 比較常會看到 16 至 19 位數的卡號，但最少可以允許12位數卡號. 自從西元 2009 年, 所有新的Laser卡 (愛爾蘭的金融網路) 已經包了 Maestro 功能一卡雙用, 所以Laser卡的 6304 這個前綴號碼也和 Maestro 的正規表達式綁在一起。
 
 - 以下是一個最基本的輸入驗證正規表達式可用於 12 至 19 位數的 Maestro 卡號，不允許其中有空白符號及破折號"-"， 例如：“5019717010103742″.
 ~~~
@@ -167,10 +169,10 @@ Maestro 卡號有好幾種前綴號碼, 包含 50, 56~58, 6390 及 67. 比較常
 
 ## Diner’s Club International ##
 
-According to Discover Network, due to an alliance with Discover, MasterCard, and Diner’s Club, as of October 2009, the IIN ranges previously used by Diner’s Club (300-305, 3095, 36, 38-39) have been retired and are “for development purposes only”. Any current Diner’s Club account numbers have been reissued from number ranges assigned to Discover. As such, these numbers no longer require the same level of protection as other account numbers, so I am no longer supporting regexes for DCI numbers.
+根據 Discover Network 所述，西元 2009 年 10 月，Discover，MasterCard 及 Diner’s Club 已經結盟，Diner's Club 之前所使用的 IIN 範圍(300-305, 3095, 36, 38-39)僅用於開發目的並且不會再被使用。目前 Diner’s Club 的帳戶號碼已經重新補發並分配到 Discover。因此，這些號碼不需要和其他類的帳戶號碼有同等的保護, 所以我不再提供 DCI 號碼正規表達式的支援。
 
-# 多種類型的卡 #
-## Visa, MasterCard, American Express, and Discover Cards ##
+# 複合型卡片驗證方法 #
+## Visa, MasterCard, American Express 及 Discover Cards ##
 
 - 以下是一個基本的正規表達式可以用來驗證比較通用的 16 位數卡號及 15 位數的美國運通卡. 比較舊的13位數卡號則被忽略了。 不允許有空白符號或破折號"-"， 例如: “4012888888881881″ 或 “378282246310005″.
 ~~~
