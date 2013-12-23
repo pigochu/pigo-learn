@@ -112,6 +112,7 @@ Japan Credit Bureau (JCB) 帳戶號碼開頭有固定的 IIN 識別碼其範圍�
 ~~~
     ^35(?:2[89]|[3-8]\d)\d{12}$
 ~~~
+
 - For each of the VISA regexes above that contains “4(\d{3})” near the beginning, substitute with “3(5(?:2[89]|[3-8]\d))” for an equivalent JCB regular expression. For regexes without capturing groups, substitute “4\d{3}” with “35(?:2[89]|[3-8]\d)” as appropriate. All of the above VISA regexes can be transformed into Japan Credit Bureau regexes using this substitution method. For example, input validation for JCB card numbers with optional matching delimiters of spaces or dashes between number groups mirrors VISA validation:
 ~~~
     ^4\d{3}([\ \-]?)\d{4}\1\d{4}\1\d{4}$
@@ -147,6 +148,7 @@ Japan Credit Bureau (JCB) 帳戶號碼開頭有固定的 IIN 識別碼其範圍�
     \b(?<!\-|\.)3[47]\d\d([\ \-]?)(?<!\d\ \d{4}\ )(?!(\d)\2{5}|123456|234567|345678)\d{6}(?!\ \d{5}\ \d)\1(?!(\d)\3{4}|12345|56789)\d{5}(?!\-)(?!\.\d)\b
 ~~~
 
+
 ## China UnionPay (中國銀聯) ##
 
 根據最近的統計，幾乎每一個中國公民在中國(包含了香港及澳門)至少擁有一張銀聯卡。 有超過250個國際和中國國內的會員銀行發行到世界各地約31億張銀聯信用卡和轉帳卡。這還不包括發行到雙銀行網路的卡, 大多數中國銀聯卡前綴號碼會是 “620″ 至 “625″, 且卡號長度為 16 至 19 個字元。
@@ -157,6 +159,7 @@ Form-input validation or data masking of variable-length card numbers is nearly 
 ~~~
     ^62[0-5]\d{13,16}$
 ~~~
+
 
 ## Maestro ##
 
