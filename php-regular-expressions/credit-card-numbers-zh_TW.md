@@ -24,7 +24,7 @@
 ==============
 沒有純軟體解決方案可以完全精準的識別所有的信用卡號碼， 不論多麼複雜的正規表達式或演算法都無法做到。 Solely financial network and payment gateways provide the greatest assurance of valid account numbers and even their databases may be 30 days out of date. Only after you accept that should you move forward with home-spun validation.
 
-更糟的是，有許多國際信用卡或轉帳卡是發行在雙銀行系統下都可以通用的。 如中國建設銀行發行了一張 IIN 356895 的卡是中國銀聯卡及Japan Credit Bureau card 都可通用的。.同樣的銀行又發行了一張 IIN 622286 的卡可於中國銀聯和 Discover Network 間通用, 這些卡都是屬於 UnionPay network(中國銀聯網路)。 北京銀行發行了一張 IIN 為 602969 的雙系統 VISA UnionPay 轉帳卡，遺憾的是它並不屬於任何主要的金融網路。
+更糟的是，有許多國際信用卡或轉帳卡是發行在雙銀行系統下都可以通用的。 如中國建設銀行發行了一張 IIN 356895 的卡是結合了中國銀聯卡及Japan Credit Bureau card 通用的卡。同樣這家銀行又發行了一張 IIN 622286 的卡結合了中國銀聯和 Discover Network 通用的卡, 這些卡都是屬於 UnionPay network(中國銀聯網路)。 而北京銀行發行了一張 IIN 為 602969 的轉帳卡結合了VISA及UnionPay，它並不屬於任何主要的金融網路交易系統。
 
 使用錯誤的正規表達式將會讓結果變成是無意義且惱人，在最壞的情況下甚至會發生災難。因此請務必先閱讀 [The Perfect Credit Card Number RegEx](the-perfect-credit-card-number-regex.md) 以及為何這些正規表達式沒有一個可以達到你的目的。
 
